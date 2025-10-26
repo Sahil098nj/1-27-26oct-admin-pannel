@@ -1,0 +1,70 @@
+| table_name      | column_name              | data_type                | character_maximum_length | is_nullable | column_default    | constraint_type |
+| --------------- | ------------------------ | ------------------------ | ------------------------ | ----------- | ----------------- | --------------- |
+| brands          | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| brands          | category                 | USER-DEFINED             | null                     | NO          | null              | null            |
+| brands          | name                     | text                     | null                     | NO          | null              | null            |
+| brands          | logo_url                 | text                     | null                     | YES         | null              | null            |
+| brands          | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| cities          | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| cities          | name                     | text                     | null                     | NO          | null              | UNIQUE          |
+| cities          | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| devices         | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| devices         | brand_id                 | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| devices         | series                   | text                     | null                     | YES         | null              | null            |
+| devices         | model_name               | text                     | null                     | NO          | null              | null            |
+| devices         | release_date             | date                     | null                     | YES         | null              | null            |
+| devices         | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| devices         | image_url                | text                     | null                     | YES         | null              | null            |
+| pickup_requests | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| pickup_requests | user_phone               | text                     | null                     | NO          | null              | null            |
+| pickup_requests | device_id                | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| pickup_requests | variant_id               | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| pickup_requests | city_id                  | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| pickup_requests | condition                | USER-DEFINED             | null                     | NO          | null              | null            |
+| pickup_requests | age_group                | USER-DEFINED             | null                     | NO          | null              | null            |
+| pickup_requests | has_charger              | boolean                  | null                     | YES         | false             | null            |
+| pickup_requests | has_bill                 | boolean                  | null                     | YES         | false             | null            |
+| pickup_requests | has_box                  | boolean                  | null                     | YES         | false             | null            |
+| pickup_requests | device_powers_on         | boolean                  | null                     | YES         | true              | null            |
+| pickup_requests | display_condition        | USER-DEFINED             | null                     | NO          | null              | null            |
+| pickup_requests | body_condition           | USER-DEFINED             | null                     | NO          | null              | null            |
+| pickup_requests | final_price              | numeric                  | null                     | NO          | null              | null            |
+| pickup_requests | customer_name            | text                     | null                     | NO          | null              | null            |
+| pickup_requests | address                  | text                     | null                     | NO          | null              | null            |
+| pickup_requests | pincode                  | text                     | null                     | NO          | null              | null            |
+| pickup_requests | pickup_date              | date                     | null                     | NO          | null              | null            |
+| pickup_requests | pickup_time              | text                     | null                     | NO          | null              | null            |
+| pickup_requests | status                   | text                     | null                     | YES         | 'pending'::text   | null            |
+| pickup_requests | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| pickup_requests | can_make_calls           | boolean                  | null                     | YES         | true              | null            |
+| pickup_requests | is_touch_working         | boolean                  | null                     | YES         | true              | null            |
+| pickup_requests | is_screen_original       | boolean                  | null                     | YES         | true              | null            |
+| pickup_requests | is_battery_healthy       | boolean                  | null                     | YES         | true              | null            |
+| pickup_requests | overall_condition        | text                     | null                     | YES         | 'good'::text      | null            |
+| pickup_requests | email                    | text                     | null                     | YES         | null              | null            |
+| pickup_requests | submitted_by             | text                     | null                     | YES         | null              | null            |
+| pickup_requests | submitted_at             | timestamp with time zone | null                     | YES         | now()             | null            |
+| reviews         | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| reviews         | customer_name            | text                     | null                     | NO          | null              | null            |
+| reviews         | device_name              | text                     | null                     | NO          | null              | null            |
+| reviews         | rating                   | integer                  | null                     | NO          | null              | null            |
+| reviews         | review_text              | text                     | null                     | NO          | null              | null            |
+| reviews         | location                 | text                     | null                     | YES         | null              | null            |
+| reviews         | is_featured              | boolean                  | null                     | YES         | false             | null            |
+| reviews         | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| variants        | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| variants        | device_id                | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| variants        | storage_gb               | integer                  | null                     | NO          | null              | null            |
+| variants        | base_price               | numeric                  | null                     | NO          | null              | null            |
+| variants        | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| warranty_prices | id                       | uuid                     | null                     | NO          | gen_random_uuid() | PRIMARY KEY     |
+| warranty_prices | variant_id               | uuid                     | null                     | NO          | null              | FOREIGN KEY     |
+| warranty_prices | variant_id               | uuid                     | null                     | NO          | null              | UNIQUE          |
+| warranty_prices | price_0_3_months         | numeric                  | null                     | NO          | null              | null            |
+| warranty_prices | price_3_6_months         | numeric                  | null                     | NO          | null              | null            |
+| warranty_prices | price_6_11_months        | numeric                  | null                     | NO          | null              | null            |
+| warranty_prices | price_11_plus_months     | numeric                  | null                     | NO          | null              | null            |
+| warranty_prices | created_at               | timestamp with time zone | null                     | YES         | now()             | null            |
+| warranty_prices | charger_deduction_amount | numeric                  | null                     | YES         | 2.00              | null            |
+| warranty_prices | box_deduction_amount     | numeric                  | null                     | YES         | 2.00              | null            |
+| warranty_prices | bill_deduction_amount    | numeric                  | null                     | YES         | 2.00              | null            |
